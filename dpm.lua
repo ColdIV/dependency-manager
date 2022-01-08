@@ -111,6 +111,14 @@ function dpm:getScripts ()
     end
 end
 
+function dpm:getNameCode (argument)
+    local separator = string.find(argument, "@")
+    if not separator then return nil end
+    local name = string.sub(argument, 1, separator - 1)
+    local code = string.sub(argument, separator + 1)
+    return name, code
+end
+
 function dpm:installScript (name, code)
     self:log("Installing script " .. name .. " with code " .. code .. "...")
     for i = 1, #self.reservedNames do
@@ -149,16 +157,46 @@ function dpm:installGit (name)
     end
 end
 
+function dpm:checkRequirements(name)
+    self:log("Checking requirements...")
+    local temp = require(self.dpmPath .. self.config.scriptPath .. name)
+    for i = 1, #temp.requires do
+        if fs.exists(self.dpmPath .. self.config.scriptPath .. temp[i]) then
+            self:log("Found " .. temp[i])
+        else
+            self:log("Trying to install " .. temp[i])
+            if string.find(name, "@") then
+                name, code = self:getNameCode(name)
+                self:installScript(name, code)
+            else
+                self:installGit(name)
+            end
+            self:checkRequirements(name)
+        end
+    end
+    self:log("Done")
+end
+
 function dpm:updateScript (name)
     self:log("Updating script: " .. name)
-    local code = self.scripts[name]
-    
-    if not code then
-        self:log("Error! Script does not exist.")
-    else
-        self:log("Code found: " .. code)
-        shell.run("pastebin", "run", self.config.installScriptCode .. " " .. code .. " " .. self.dpmPath .. self.config.scriptPath .. name)
+    local url = self:getGitURL(name)
+    self:log("Checking " .. url .. "...")
+    if http.checkURL(url) then
+        self:log("Found! Installing from " .. url .. "...")
+        self:installGit(name)
         self:log("Done")
+    else
+        self:log("Could not load from " .. url)
+        self:log("Checking for code...")
+        local code = self.scripts[name]
+        
+        if not code then
+            self:log("Error! Script does not exist.")
+        else
+            self:log("Code found: " .. code)
+            shell.run("pastebin", "run", self.config.installScriptCode .. " " .. code .. " " .. self.dpmPath .. self.config.scriptPath .. name)
+            self:log("Done")
+        end
     end
 end
 
@@ -286,14 +324,6 @@ function dpm:init ()
     self:getScripts()
 end
 
-function dpm:getNameCode (argument)
-    local separator = string.find(argument, "@")
-    if not separator then return nil end
-    local name = string.sub(argument, 1, separator - 1)
-    local code = string.sub(argument, separator + 1)
-    return name, code
-end
-
 function dpm:checkArguments (args, offset)
     local firstArgument = offset + 1
     local name = args[firstArgument + 1]
@@ -306,10 +336,12 @@ function dpm:checkArguments (args, offset)
     if args[firstArgument] == "install" then
         if value and name then
             self:installScript(name, value)
+            self:checkRequirements(name)
         else
             local url = self:getGitURL(name)
             if (http.checkURL(url)) then
                 self:installGit(name)
+                self:checkRequirements(name)
             else
                 self:log("Error! Could not install script with name: " .. name)
             end
@@ -360,6 +392,15 @@ function dpm:load(name)
         if code then
             self:log("Trying to install " .. name .. " with code " .. code .. "...")
             self:installScript(name, code)
+            self:checkRequirements(name)
+        else
+            local url = self:getGitURL(name)
+            if (http.checkURL(url)) then
+                self:installGit(name)
+                self:checkRequirements(name)
+            else
+                self:log("Error! Could not install script with name: " .. name)
+            end
         end
     else
         local path = self.dpmPath .. self.config.scriptPath .. name
