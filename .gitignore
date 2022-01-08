@@ -1,2 +1,4 @@
 test.lua
-lib/*
+cldv/dpm/config.json
+cldv/dpm/log.txt
+cldv/dpm/scripts.json

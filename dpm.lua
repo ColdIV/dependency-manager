@@ -54,11 +54,14 @@ dpm.config = {
     ["code"] = "KqhwihZr",
     ["installScriptCode"] = "FuQ3WvPs",
     ["scriptListPath"] = "scripts.json",
-    ["scriptPath"] = "scripts/"
+    ["scriptPath"] = "scripts/",
+    ["gitRepo"] = "ColdIV/dependency-manager/",
+    ["gitBranch"] = "master",
+    ["rawGit"] = "https://raw.githubusercontent.com/"
 }
 ----------
 
-dpm.dpmPath = "lib/cldv/dpm/"
+dpm.dpmPath = "cldv/dpm/"
 dpm.configFilePath = dpm.dpmPath .. "config.json"
 dpm.reservedNames = {
     "all"
@@ -121,6 +124,29 @@ function dpm:installScript (name, code)
     
     self.scripts[name] = code
     self:saveScripts()
+end
+
+function dpm:getGitURL (name)
+    return self.config.rawGit .. self.config.gitRepo .. self.config.gitBranch .. "/" .. self.config.scriptPath .. name .. ".lua"
+end
+
+function dpm:installGit (name)
+    local url = self:getGitURL(name)
+    self:log("Installing script " .. name .. " from " .. url .. "...")
+    local request = http.get(url)
+    if request then
+        local content = request.readAll()
+        request.close()
+
+        if content then
+            local file = fs.open("test", "w")
+            file.write(content)
+            file.close()
+            self:log("Done")
+        end
+    else
+        self:log("Error! Could not read content from: " .. url)
+    end
 end
 
 function dpm:updateScript (name)
@@ -281,7 +307,12 @@ function dpm:checkArguments (args, offset)
         if value and name then
             self:installScript(name, value)
         else
-            self:log("Error! Could not install script with name: " .. name .. " and code: " .. value)
+            local url = self:getGitURL(name)
+            if (http.checkURL(url)) then
+                self:installGit(name)
+            else
+                self:log("Error! Could not install script with name: " .. name)
+            end
         end
     elseif args[firstArgument] == "update" then
         if name then
