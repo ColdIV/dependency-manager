@@ -139,7 +139,7 @@ function dpm:installGit (name)
         request.close()
 
         if content then
-            local file = fs.open("test", "w")
+            local file = fs.open(self.dpmPath .. self.config.scriptPath .. name, "w")
             file.write(content)
             file.close()
             self:log("Done")
