@@ -1,9 +1,13 @@
 local obj = {}
 
-obj.requires = {}
+obj.requires = {
+    "examplePrint"
+}
+
+local examplePrint = require("examplePrint")
 
 function obj:test {
-    print ("It works!")
+    examplePrint:printRandomNumber()
 }
 
 return obj
