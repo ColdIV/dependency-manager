@@ -6,8 +6,8 @@ obj.requires = {
 
 local examplePrint = require("examplePrint")
 
-function obj:test {
+function obj:test()
     examplePrint:printRandomNumber()
-}
+end
 
 return obj
