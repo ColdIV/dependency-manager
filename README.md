@@ -1,6 +1,11 @@
 # Dependency Manager
 A dependency manager for scripts to use in the mod CC: Tweaked of Minecraft.
 
+# Install
+To install run the following script in your computers / turtles console:
+
+`pastebin run FuQ3WvPs KqhwihZr dpm`
+
 # Example Program
 ```lua
 -- exampleProgram.lua
@@ -54,11 +59,6 @@ return math.random(1,100)
 
 # Run
 To run, just run `exampleProgram` normally, without bothering to install any of the dependencies. **dpm** will handle that for you.
-
-# Install
-To install run the following script in your computers / turtles console:
-
-`pastebin run FuQ3WvPs KqhwihZr dpm`
 
 # dpm arguments
 There are a bunch of commands you can use with the Dependency Manager (dpm):
