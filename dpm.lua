@@ -5,6 +5,7 @@
 --[ pastebin run FuQ3WvPs KqhwihZr dpm ]-----------------
 ---------------------------------------------------------
 --[[ Usage [Arguments] ----------------------------------
+dpm install <name in git repo>
 dpm install <name> <pastebin code>
 dpm install <name@pastebin code>
 dpm update <name>
@@ -68,7 +69,7 @@ dpm.reservedNames = {
 }
 dpm.scripts = {}
 dpm.commandHelp = {
-    ["install"] = "install <name> <code>\tInstalls the given script\ninstall <name@code>\t\tInstalls the given script",
+    ["install"] = "install <name in git repo>\tInstalls the given script from the repository\ninstall <name> <code>\tInstalls the given script\ninstall <name@code>\t\tInstalls the given script",
     ["update"] = "update all\t\t\t\t\tUpdates all scripts\nupdate <name>\t\tUpdates script by name",
     ["remove"] = "remove all\t\t\t\t\tRemoves all scripts\nremove <name>\t\tRemoves script by name",
     ["list"] = "list\t\t\tLists all installed scripts",
