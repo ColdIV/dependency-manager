@@ -57,6 +57,7 @@ dpm.config = {
     ["installScriptCode"] = "FuQ3WvPs",
     ["scriptListPath"] = "scripts.json",
     ["scriptPath"] = "libs/",
+    ["programPath"] = "programs/",
     ["gitRepo"] = "ColdIV/dependency-manager/",
     ["gitBranch"] = "master",
     ["rawGit"] = "https://raw.githubusercontent.com/"
@@ -74,6 +75,7 @@ dpm.commandHelp = {
     ["update"] = "update all\t\t\t\t\tUpdates all scripts\nupdate <name>\t\tUpdates script by name",
     ["remove"] = "remove all\t\t\t\t\tRemoves all scripts\nremove <name>\t\tRemoves script by name",
     ["list"] = "list\t\t\tLists all installed scripts",
+    ["get"] = "get <name in git repo>\tDownloads the given program from the repository\nget <name@pastebin code>\tDownloads the given program from pastebin",
     ["help"] = "help\t\t\tShows a list of all available arguments",
     ["config"] = "config\t\t\t\t\tShows a list of all available arguments\nconfig name value\t\tSets the value of the variable"
 }
@@ -121,6 +123,38 @@ function dpm:getNameCode (argument)
     return name, code
 end
 
+function dpm:getGitURL (name, gitDirectory)
+    return self.config.rawGit .. self.config.gitRepo .. self.config.gitBranch .. "/" .. gitDirectory .. name .. ".lua"
+end
+
+function dpm:downloadGit (name, gitDirectory, path)
+    local url = self:getGitURL(name, gitDirectory)
+    self:log("Downloading " .. url .. " to " .. path .. "...")
+    local request = http.get(url)
+    if request then
+        local content = request.readAll()
+        request.close()
+
+        if content then
+            local file = fs.open(path .. name, "w")
+            file.write(content)
+            file.close()
+            self:log("Done")
+        end
+    else
+        self:log("Error! Could not read content from: " .. url)
+    end
+end
+
+function dpm:getProgram (name, code)
+    if name and not code and string.find(name, "@") or name and code then
+        if not code then name, code = self:getNameCode(name) end
+        shell.run("pastebin", "run", self.config.installScriptCode .. " " .. code .. " " .. name)
+    else
+        self:downloadGit(name, self.config.programPath, "/")
+    end
+end
+
 function dpm:installScript (name, code)
     self:log("Installing script " .. name .. " with code " .. code .. "...")
     for i = 1, #self.reservedNames do
@@ -136,27 +170,8 @@ function dpm:installScript (name, code)
     self:saveScripts()
 end
 
-function dpm:getGitURL (name)
-    return self.config.rawGit .. self.config.gitRepo .. self.config.gitBranch .. "/" .. self.config.scriptPath .. name .. ".lua"
-end
-
 function dpm:installGit (name)
-    local url = self:getGitURL(name)
-    self:log("Installing script " .. name .. " from " .. url .. "...")
-    local request = http.get(url)
-    if request then
-        local content = request.readAll()
-        request.close()
-
-        if content then
-            local file = fs.open(self.dpmPath .. self.config.scriptPath .. name, "w")
-            file.write(content)
-            file.close()
-            self:log("Done")
-        end
-    else
-        self:log("Error! Could not read content from: " .. url)
-    end
+    self:downloadGit(name, self.config.scriptPath, self.dpmPath .. self.config.scriptPath)
 end
 
 function dpm:checkRequirements(name)
@@ -211,7 +226,7 @@ end
 
 function dpm:updateScript (name)
     self:log("Updating script: " .. name)
-    local url = self:getGitURL(name)
+    local url = self:getGitURL(name, self.config.scriptPath)
     self:log("Checking " .. url .. "...")
     if http.checkURL(url) then
         self:log("Found! Installing from " .. url .. "...")
@@ -370,7 +385,7 @@ function dpm:checkArguments (args, offset)
             self:installScript(name, value)
             self:checkRequirements(name)
         else
-            local url = self:getGitURL(name)
+            local url = self:getGitURL(name, self.config.scriptPath)
             if (http.checkURL(url)) then
                 self:installGit(name)
                 self:checkRequirements(name)
@@ -404,6 +419,12 @@ function dpm:checkArguments (args, offset)
         else
             self:list()
         end
+    elseif args[firstArgument] == "get" then
+        if name then
+            self:getProgram(name, value)
+        else
+            self:log("Error! Missing argument.")
+        end
     elseif args[firstArgument] == "help" then        
         self:help(name)
     elseif args[firstArgument] == "config" then
@@ -425,7 +446,7 @@ function dpm:load(name)
             self:log("Trying to install " .. name .. " with code " .. code .. "...")
             self:installScript(name, code)
         else
-            local url = self:getGitURL(name)
+            local url = self:getGitURL(name, self.config.scriptPath)
             if (http.checkURL(url)) then
                 self:installGit(name)
             else

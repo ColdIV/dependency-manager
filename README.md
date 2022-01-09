@@ -7,6 +7,7 @@ To install run the following script in your computers / turtles console:
 `pastebin run FuQ3WvPs KqhwihZr dpm`
 
 # Example Program
+Use `dpm get exampleProgram` to install.
 ```lua
 -- exampleProgram.lua
 local dpm = require("dpm")
@@ -93,6 +94,13 @@ There are a bunch of commands you can use with the Dependency Manager (dpm):
 ## List all installed libs
 - `dpm list`
 
+## Get programs
+- `dpm get <name>`
+
+  Downloads the program <name> from this repository.
+- `dpm get <name@pastebin code>`
+
+  Downloads the program <name> from pastebin
 ## Configure settings
 - `dpm config`
 
