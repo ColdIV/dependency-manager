@@ -52,6 +52,7 @@ dpm.config = {
     ["logDate"] = true,
     ["writeLogFile"] = true,
     ["logFilePath"] = "log.txt",
+    ["printPrefix"] = "[dpm] ",
     ["code"] = "KqhwihZr",
     ["installScriptCode"] = "FuQ3WvPs",
     ["scriptListPath"] = "scripts.json",
@@ -80,7 +81,7 @@ dpm.commandHelp = {
 function dpm:log (message)
     local datetime = ""
     if self.config.logDate then datetime = os.date("[%Y-%m-%d %H:%M:%S] ") end
-    if self.config.verbose then print (datetime .. message) end
+    if self.config.verbose then print (self.config.printPrefix .. message) end
 
     if self.config.writeLogFile then
         local file = fs.open(self.dpmPath .. self.config.logFilePath, "a")
