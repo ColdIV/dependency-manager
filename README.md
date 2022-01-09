@@ -108,3 +108,12 @@ There are a bunch of commands you can use with the Dependency Manager (dpm):
 - `dpm help <argument name>`
 
   Shows info to a specific command
+
+# Contribute
+You are welcome to contribute your own scripts!
+
+To do that please create a pull request and add your script to the others in `libs/`.
+
+Also please add a card with a small description of your script to the `inhdex.html` within the `gh-pages` branch.
+
+You can just copy the structure of the `example` that I've added in there.
