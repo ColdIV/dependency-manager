@@ -1,1 +1,296 @@
-test
+<!doctype html>
+<html>
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+		<title>
+			Dependency Manager for CC: Tweaked
+		</title>
+		
+		<style>
+			html, body { margin: 0; padding: 0; }
+			body {
+				color: #ccc;
+				background: #222;
+				display: flex;
+				flex-flow: column;
+				align-items: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+			}
+			header, main, footer {
+                box-sizing: border-box;
+				max-width: 1200px;
+				width: 100%;
+			}
+			header {
+				display: flex;
+				flex-flow: row;
+				justify-content: space-between;
+				padding: 1rem 0;
+				color: #ccc;
+				margin-bottom: 1rem;
+			}
+			header nav a {
+				margin-right: 8px;
+			}
+            header a {
+                text-decoration: none;
+            }
+            header a:hover {
+                text-decoration: underline;
+            }
+			
+			.page {
+				display: none;
+			}
+			
+			.page:target {
+				display: block;
+			}
+            
+            .page.default {
+                display: block;
+            }
+            
+            .page:target ~ .page.default {
+                display: none;
+            }
+    
+            .page .content {
+                background-color: #ccc;
+                border-radius: 3px;
+                color: #222;
+                padding: 1rem;
+            }
+            
+            code ~ .content {
+                margin-top: 40px;
+            }
+			
+			a {
+				color: #efefef;
+			}
+            
+            .content a {
+                color: #000;
+            }
+            
+            code {
+                background-color: #191919;
+                color: #ccc;
+                padding: 1px 5px;
+            }
+            
+            code.prominent {
+                background-color: #ccc;
+                border: 1px dotted #222;
+                color: #222;
+                padding: .5rem;
+            }
+            
+            pre {
+                background-color: #191919;
+                padding: 1rem;
+                overflow: auto;
+            }
+            pre code {
+                padding: initial;
+            }
+            
+            h1 {
+                position: relative;
+                margin-bottom: 70px;
+                margin-top: 0;
+            }
+            h1 .sub {
+                position: absolute;
+                left: 150px;
+                top: 50px;
+                font-size: 14px;
+            }
+            
+            h2 {
+                margin-top: 0px;
+            }
+            
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            .content-card {
+                margin-top: 1rem;
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+            }
+
+            .content-card div {
+                box-sizing: border-box;
+                margin-top: 10px;
+                width: 100%;
+                background-color: #ccc;
+                border-radius: 3px;
+                color: #222;
+                padding: 1rem;
+            }
+
+            @media only screen and (max-width: 600px) {
+                main, header, footer {
+                    padding: 1rem;
+                }
+
+                h1 .sub {
+                    top: 90px;
+                    left: 0;
+                }
+            }
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="#install">Install</a>
+				<a href="#overview">Scripts overview</a>
+				<a href="#about">About</a>
+			</nav>
+			<a href="https://github.com/ColdIV" target="_blank">@ColdIV</a>
+		</header>
+		
+		<main>
+            <h1>
+                Dependency Manager
+                <span class="sub">for <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a> Scripts</span>
+            </h1>
+            
+			<div id="install" class="page">
+                <code class="prominent">pastebin run FuQ3WvPs KqhwihZr dpm</code>
+                <div class="content">
+                    <h2>Install</h2>
+                    <p>
+                        To install the <strong>Dependency Manager</strong> (dpm) copy the install script <code>pastebin run FuQ3WvPs KqhwihZr dpm</code> and paste it in your <a href="https://tweaked.cc/" target="_blank">Turtles / Computers</a> console.
+                    </p>
+                    <p>
+                        You can then go to the <a href="#overview">overview</a> and install the scripts you want to use.
+                    </p>
+                    <p>
+                        Click <a href="#about">here</a> for more information.
+                    </p>
+                </div>
+			</div>
+			
+			<div id="overview" class="page">
+                <div class="content">
+                    <h2>Overview</h2>
+                    <p>To install a script use: <code>dpm install &lt;name&gt;</code></p>
+                    <p>Use it within your program with:</p>
+                    <pre><code>local dpm = require("dpm")
+local scriptName = dpm:load("scriptName")</code></pre>
+                    <p>Dependencies will be automatically installed by <strong>dpm</strong>.</p>
+                    <p>
+                        You can install your own scripts from pastebin with <code>name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.<br>
+                        Remember to ommit the file extension <code>.lua</code>!
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    To add your own libraries here, please create a <a href="">pull request</a>.
+                </div>
+                
+                <!-- Example by ColdIV -->
+                <div class="content-card">
+                    <code class="prominent">dpm install example</code>
+                    <div>
+                        An example library.
+                    </div>
+                </div>
+                <!-- /Example -->
+
+                <!-- Add new cards below -->
+
+                <!-- Add new cards above -->
+			</div>
+            
+			<div id="about" class="page default">
+                <div class="content">
+                    <h2>About</h2>
+                    <p>This is a small dependency manager for the scripts that I made for projects in <a href="https://www.minecraft.net/" target="_blank">Minecraft</a> with the mod <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a>.</p>
+                    <br>
+                    <p><strong>View this project on GitHub:</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">ColdIV/dependency-manager</a></p>
+                    <br>
+                    <p>Click <a href="#install">here</a> to find out how to install the <strong>Dependency Manager</strong>.</p>
+                    <p>Click <a href="#overview">here</a> to find and install existing scripts.</p>
+                    <hr>
+                    <p><strong>List of available commands:</strong></p>
+                    <ul>
+                        <li><code>dpm install &lt;name&gt; &lt;pastebin code&gt;</code></li>
+                        <li><code>dpm install &lt;name@pastebin code&gt;</code></li>
+                        <li><code>dpm update &lt;name&gt;</code></li>
+                        <li><code>dpm update all</code></li>
+                        <li><code>dpm remove &lt;name&gt;</code></li>
+                        <li><code>dpm remove all</code></li>
+                        <li><code>dpm list</code></li>
+                        <li><code>dpm config</code></li>
+                        <li><code>dpm config &lt;name&gt; &lt;value&gt;</code></li>
+                        <li><code>dpm help</code></li>
+                        <li><code>dpm help &lt;argument name&gt;</code></li>
+                    </ul>
+                    <hr>
+                    <p><strong>Example usage:</strong></p>
+                    <pre><code>local dpm = require("dpm")
+local scriptName = dpm:load("scriptName")
+--- or, to install if script cannot be found:
+local scriptName = dpm:load("scriptName@pastebinCode")</code></pre>
+
+
+                    <p><strong>Example Program:</strong></p>
+                    <pre><code>-- exampleProgram.lua
+local dpm = require("dpm")
+
+local example = dpm:load("example")
+
+example:test()</code></pre>
+                    Loads the library <code>example</code> and its dependencies.
+
+                    If the file cannot be found locally it will search for it within this repository or on pastebin if the code has previously been saved to the <code>scripts.json</code>.
+
+                    <p><strong>Example Libraries:</strong></p>
+                    <pre><code>-- example.lua
+--@requires examplePrint
+
+local obj = {}
+
+local examplePrint = require("dpm.libs.examplePrint")
+
+function obj:test()
+    examplePrint:printRandomNumber()
+end
+
+return obj</code></pre>
+                    <strong>Note: The comment: <code>--@requires examplePrint</code> is required to check for and install the library <code>examplePrint</code> if it is not yet installed.</strong>
+
+                    <pre><code>-- examplePrint.lua
+--@requires exampleNumber@QsN94px9
+
+local obj = {}
+
+local exampleNumber = require("dpm.libs.exampleNumber")
+
+function obj:printRandomNumber ()
+    print ("It works! Random Number: " .. exampleNumber)
+end
+
+return obj</code></pre>
+                    <strong>Note: Here the require comment has a pastebin code within it, this will make sure to install the file from pastebin if it is not yet installed.</strong>
+
+                    <pre><code>-- exampleNumber.lua (from https://pastebin.com/QsN94px9)
+return math.random(1,100)</code></pre>
+
+                    <p><strong>Run</strong></p>
+                    To run, just run <code>exampleProgram</code> normally, without bothering to install any of the dependencies. <strong>dpm</strong> will handle that for you.
+                </div>
+			</div>
+		</main>
+	</body>
+</html>
