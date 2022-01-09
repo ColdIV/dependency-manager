@@ -54,14 +54,14 @@ dpm.config = {
     ["code"] = "KqhwihZr",
     ["installScriptCode"] = "FuQ3WvPs",
     ["scriptListPath"] = "scripts.json",
-    ["scriptPath"] = "scripts/",
+    ["scriptPath"] = "libs/",
     ["gitRepo"] = "ColdIV/dependency-manager/",
     ["gitBranch"] = "master",
     ["rawGit"] = "https://raw.githubusercontent.com/"
 }
 ----------
 
-dpm.dpmPath = "cldv/dpm/"
+dpm.dpmPath = "dpm/"
 dpm.configFilePath = dpm.dpmPath .. "config.json"
 dpm.reservedNames = {
     "all"
@@ -158,22 +158,44 @@ function dpm:installGit (name)
 end
 
 function dpm:checkRequirements(name)
-    self:log("Checking requirements...")
-    local temp = require(self.dpmPath .. self.config.scriptPath .. name)
-    for i = 1, #temp.requires do
-        if fs.exists(self.dpmPath .. self.config.scriptPath .. temp[i]) then
-            self:log("Found " .. temp[i])
-        else
-            self:log("Trying to install " .. temp[i])
-            if string.find(name, "@") then
-                name, code = self:getNameCode(name)
-                self:installScript(name, code)
+    self:log("Checking requirements of " .. name .. "...")
+    
+    self:log("Reading requirements from file " .. self.dpmPath .. self.config.scriptPath .. name)
+    local file = fs.open(self.dpmPath .. self.config.scriptPath .. name, "r")
+
+    local requires = {}
+    while true do
+        local line = file.readLine()
+        if not line then break end
+
+        local find = string.find(line, "--@requires")
+        if find then
+            line = string.sub(line, find + 12)
+            local lineEnd = string.find(line, " ")
+            if lineEnd then
+                requires[#requires + 1] = string.sub(line, 0, lineEnd - 1)
             else
-                self:installGit(name)
+                requires[#requires + 1] = string.sub(line, 0)
             end
-            self:checkRequirements(name)
+
+            self:log("Found requirement: " .. requires[#requires])
+            if fs.exists(self.dpmPath .. self.config.scriptPath .. requires[#requires]) then
+                self:log("Requirement already satisfied!")
+            else
+                self:log("Missing requirement " .. requires[#requires])
+                self:log("Trying to install " .. requires[#requires])
+                local n = requires[#requires]
+                if string.find(n, "@") then
+                    n, code = self:getNameCode(n)
+                    self:installScript(n, code)
+                else
+                    self:installGit(n)
+                end
+                self:checkRequirements(n)
+            end
         end
     end
+    
     self:log("Done")
 end
 
@@ -403,6 +425,7 @@ function dpm:load(name)
             end
         end
     else
+        self:checkRequirements(name)
         local path = self.dpmPath .. self.config.scriptPath .. name
         local script = require(path)
         return script

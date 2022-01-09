@@ -1,10 +1,8 @@
+--@requires exampleNumber@QsN94px9
+
 local obj = {}
 
-obj.requires = {
-    "exampleNumber@QsN94px9"
-}
-
-local exampleNumber = require("exampleNumber")
+local exampleNumber = require("dpm.libs.exampleNumber")
 
 function obj:printRandomNumber ()
     print ("It works! Random Number: " .. exampleNumber)
