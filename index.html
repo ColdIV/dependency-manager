@@ -106,7 +106,7 @@
             }
             h1 .sub {
                 position: absolute;
-                left: 150px;
+                left: 200px;
                 top: 50px;
                 font-size: 14px;
             }
@@ -121,6 +121,7 @@
 
             .content-card {
                 margin-top: 1rem;
+                margin-bottom: 4rem;
                 display: flex;
                 flex-flow: column;
                 align-items: flex-start;
@@ -134,6 +135,10 @@
                 border-radius: 3px;
                 color: #222;
                 padding: 1rem;
+            }
+
+            .content-card div a {
+                color: #000;
             }
 
             @media only screen and (max-width: 600px) {
@@ -164,7 +169,7 @@
                 <span class="sub">for <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a> Scripts</span>
             </h1>
             
-			<div id="install" class="page">
+			<div id="install" class="page default">
                 <code class="prominent">pastebin run FuQ3WvPs KqhwihZr dpm</code>
                 <div class="content">
                     <h2>Install</h2>
@@ -177,6 +182,8 @@
                     <p>
                         Click <a href="#about">here</a> for more information.
                     </p>
+                    <br>
+                    <p><strong>Or view this project on</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">GitHub</a>.</p>
                 </div>
 			</div>
 			
@@ -192,6 +199,16 @@ local scriptName = dpm:load("scriptName")</code></pre>
                         You can install your own scripts from pastebin with <code>name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.<br>
                         Remember to ommit the file extension <code>.lua</code>!
                     </p>
+                    <hr>
+                    <p><strong>If you prefer a simple and always up-to-date list:</strong></p>
+                    <ul>
+                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">List of libraries</a></li>
+                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">List of programs</a></li>
+                    </ul>
+                    Install a library with:<br>
+                    <code>dpm install name</code><br>
+                    Download a program with:<br>
+                    <code>dpm get name</code>
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
@@ -202,17 +219,36 @@ local scriptName = dpm:load("scriptName")</code></pre>
                 <div class="content-card">
                     <code class="prominent">dpm install example</code>
                     <div>
-                        An example library.
+                        <h3>example</h3>
+                        An example library.<br>
+                        Install an example program which uses this with <code>dpm get exampleProgram</code>.
                     </div>
                 </div>
                 <!-- /Example -->
+
+                <div class="content-card">
+                    <code class="prominent">dpm install config</code>
+                    <div>
+                        <h3>config</h3>
+                        A small library which handles configuration variables.<br>
+                        Install an example program with <code>dpm get exampleConfig</code>.<br>
+                        This library can add the following arguments to your program:
+                        <ul>
+                            <li><code>exampleConfig config</code> to list all variables in config</li>
+                            <li><code>exampleConfig config &lt;variable name&gt;</code> to show the value of a specific variable</li>
+                            <li><code>exampleConfig config &lt;variable name&gt; &lt;value&gt;</code> to set a new value</li>
+                        </ul>
+                        <br>
+                        Take a look at the <a href="https://github.com/ColdIV/dependency-manager/blob/master/programs/exampleConfig.lua" target="_blank">example program</a> for more information.
+                    </div>
+                </div>
 
                 <!-- Add new cards below -->
 
                 <!-- Add new cards above -->
 			</div>
             
-			<div id="about" class="page default">
+			<div id="about" class="page">
                 <div class="content">
                     <h2>About</h2>
                     <p>This is a small dependency manager for the scripts that I made for projects in <a href="https://www.minecraft.net/" target="_blank">Minecraft</a> with the mod <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a>.</p>
