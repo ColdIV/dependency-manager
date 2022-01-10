@@ -2,7 +2,7 @@
 
 local obj = {}
 
-local exampleNumber = require("dpm.libs.exampleNumber")
+local exampleNumber = require("cldv.dpm.libs.exampleNumber")
 
 function obj:printRandomNumber ()
     print ("It works! Random Number: " .. exampleNumber)

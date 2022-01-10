@@ -1,11 +1,12 @@
 --@requires tablelength
 
-local tablelength = require("dpm.libs.tablelength")
+local tablelength = require("cldv.dpm.libs.tablelength")
 
 local obj = {}
 
 obj.name = "default"
 obj.path = "default/"
+obj.pathPrefix = "config/"
 obj.configFile = "config.json"
 obj.config = {}
 
@@ -19,8 +20,10 @@ end
 
 function obj:save()
     local file = fs.open(self.path .. self.configFile, "w")
-    file.write (textutils.serializeJSON(self.config))
-    file.close()
+    if file then
+        file.write (textutils.serializeJSON(self.config))
+        file.close()
+    end
 end
 
 function obj:load()
@@ -85,7 +88,7 @@ function obj:init(name, path)
     if path then
         self.path = path
     else
-        self.path = self.name .. "/"
+        self.path = self.pathPrefix .. self.name .. "/"
     end
     
     self:load()

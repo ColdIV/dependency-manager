@@ -2,7 +2,7 @@
 
 local obj = {}
 
-local examplePrint = require("dpm.libs.examplePrint")
+local examplePrint = require("cldv.dpm.libs.examplePrint")
 
 function obj:test()
     examplePrint:printRandomNumber()

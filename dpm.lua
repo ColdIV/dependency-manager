@@ -64,7 +64,7 @@ dpm.config = {
 }
 ----------
 
-dpm.dpmPath = "dpm/"
+dpm.dpmPath = "cldv/dpm/"
 dpm.configFilePath = dpm.dpmPath .. "config.json"
 dpm.reservedNames = {
     "all"
@@ -366,7 +366,9 @@ function dpm:help (command)
 end
 
 function dpm:init ()
-    fs.makeDir(self.dpmPath .. self.config.scriptPath)
+    if not fs.exists(self.dpmPath .. self.config.scriptPath) then
+        fs.makeDir(self.dpmPath .. self.config.scriptPath)
+    end
     self:loadConfig()
     self:getScripts()
 end
