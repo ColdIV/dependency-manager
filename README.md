@@ -27,7 +27,7 @@ If the file cannot be found locally it will search for it within this repository
 
 local obj = {}
 
-local examplePrint = require("dpm.libs.examplePrint")
+local examplePrint = require("cldv.dpm.libs.examplePrint")
 
 function obj:test()
     examplePrint:printRandomNumber()
@@ -43,7 +43,7 @@ return obj
 
 local obj = {}
 
-local exampleNumber = require("dpm.libs.exampleNumber")
+local exampleNumber = require("cldv.dpm.libs.exampleNumber")
 
 function obj:printRandomNumber ()
     print ("It works! Random Number: " .. exampleNumber)
