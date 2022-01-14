@@ -1,3 +1,4 @@
+-- Uses this as API: https://github.com/ColdIV/discord-bot-api
 local obj = {}
 
 obj.API_TOKEN = ''
