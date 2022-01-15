@@ -5,162 +5,21 @@
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
+        <link href="css/style.css" rel="stylesheet">
+
 		<title>
 			Dependency Manager for CC: Tweaked
 		</title>
-		
-		<style>
-			html, body { margin: 0; padding: 0; }
-			body {
-				color: #ccc;
-				background: #222;
-				display: flex;
-				flex-flow: column;
-				align-items: center;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-			}
-			header, main, footer {
-                box-sizing: border-box;
-				max-width: 1200px;
-				width: 100%;
-			}
-			header {
-				display: flex;
-				flex-flow: row;
-				justify-content: space-between;
-				padding: 1rem 0;
-				color: #ccc;
-				margin-bottom: 1rem;
-			}
-			header nav a {
-				margin-right: 8px;
-			}
-            header a {
-                text-decoration: none;
-            }
-            header a:hover {
-                text-decoration: underline;
-            }
-			
-			.page {
-				display: none;
-			}
-			
-			.page:target {
-				display: block;
-			}
-            
-            .page.default {
-                display: block;
-            }
-            
-            .page:target ~ .page.default {
-                display: none;
-            }
-    
-            .page .content {
-                background-color: #ccc;
-                border-radius: 3px;
-                color: #222;
-                padding: 1rem;
-            }
-            
-            code ~ .content {
-                margin-top: 40px;
-            }
-			
-			a {
-				color: #efefef;
-			}
-            
-            .content a {
-                color: #000;
-            }
-            
-            code {
-                background-color: #191919;
-                color: #ccc;
-                padding: 1px 5px;
-            }
-            
-            code.prominent {
-                background-color: #ccc;
-                border: 1px dotted #222;
-                color: #222;
-                padding: .5rem;
-            }
-            
-            pre {
-                background-color: #191919;
-                padding: 1rem;
-                overflow: auto;
-            }
-            pre code {
-                padding: initial;
-            }
-            
-            h1 {
-                position: relative;
-                margin-bottom: 70px;
-                margin-top: 0;
-            }
-            h1 .sub {
-                position: absolute;
-                left: 200px;
-                top: 50px;
-                font-size: 14px;
-            }
-            
-            h2 {
-                margin-top: 0px;
-            }
-            
-            ul li {
-                margin-bottom: 10px;
-            }
-
-            .content-card {
-                margin-top: 1rem;
-                margin-bottom: 4rem;
-                display: flex;
-                flex-flow: column;
-                align-items: flex-start;
-            }
-
-            .content-card div {
-                box-sizing: border-box;
-                margin-top: 10px;
-                width: 100%;
-                background-color: #ccc;
-                border-radius: 3px;
-                color: #222;
-                padding: 1rem;
-            }
-
-            .content-card div a {
-                color: #000;
-            }
-
-            @media only screen and (max-width: 600px) {
-                main, header, footer {
-                    padding: 1rem;
-                }
-
-                h1 .sub {
-                    top: 90px;
-                    left: 0;
-                }
-            }
-		</style>
 	</head>
 	<body>
 		<header>
 			<nav>
-				<a href="#install">Install</a>
-				<a href="#overview">Scripts overview</a>
+				<a href="#dpm">dpm</a>
+				<a href="#libs">libs</a>
+				<a href="#programs">programs</a>
 				<a href="#about">About</a>
 			</nav>
-			<a href="https://github.com/ColdIV" target="_blank">@ColdIV</a>
+			<a href="https://github.com/ColdIV/dependency-manager" target="_blank">source</a>
 		</header>
 		
 		<main>
@@ -168,84 +27,45 @@
                 Dependency Manager
                 <span class="sub">for <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a> Scripts</span>
             </h1>
-            
-			<div id="install" class="page default">
-                <code class="prominent">pastebin run FuQ3WvPs KqhwihZr dpm</code>
-                <div class="content">
-                    <h2>Install</h2>
-                    <p>
-                        To install the <strong>Dependency Manager</strong> (dpm) copy the install script <code>pastebin run FuQ3WvPs KqhwihZr dpm</code> and paste it in your <a href="https://tweaked.cc/" target="_blank">Turtles / Computers</a> console.
-                    </p>
-                    <p>
-                        You can then go to the <a href="#overview">overview</a> and install the scripts you want to use.
-                    </p>
-                    <p>
-                        Click <a href="#about">here</a> for more information.
-                    </p>
-                    <br>
-                    <p><strong>Or view this project on</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">GitHub</a>.</p>
-                </div>
-			</div>
 			
-			<div id="overview" class="page">
+			<div id="libs" class="page">
                 <div class="content">
-                    <h2>Overview</h2>
+                    <h2>Libraries</h2>
                     <p>To install a script use: <code>dpm install &lt;name&gt;</code></p>
                     <p>Use it within your program with:</p>
                     <pre><code>local dpm = require("dpm")
 local scriptName = dpm:load("scriptName")</code></pre>
                     <p>Dependencies will be automatically installed by <strong>dpm</strong>.</p>
                     <p>
-                        You can install your own scripts from pastebin with <code>name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.<br>
-                        Remember to ommit the file extension <code>.lua</code>!
+                        You can install your own scripts from pastebin with <code>name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.
                     </p>
                     <hr>
-                    <p><strong>If you prefer a simple and always up-to-date list:</strong></p>
-                    <ul>
-                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">List of libraries</a></li>
-                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">List of programs</a></li>
-                    </ul>
-                    Install a library with:<br>
-                    <code>dpm install name</code><br>
-                    Download a program with:<br>
-                    <code>dpm get name</code>
+                    <p><strong>Click <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> if you prefer a simple and always up-to-date list.</strong></p>
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
                     To add your own libraries here, please create a <a href="https://github.com/ColdIV/dependency-manager" target="_blank">pull request</a>.
                 </div>
                 
-                <!-- Example by ColdIV -->
-                <div class="content-card">
-                    <code class="prominent">dpm install example</code>
-                    <div>
-                        <h3>example</h3>
-                        An example library.<br>
-                        Install an example program which uses this with <code>dpm get exampleProgram</code>.
-                    </div>
-                </div>
-                <!-- /Example -->
-
-                <div class="content-card">
-                    <code class="prominent">dpm install config</code>
-                    <div>
-                        <h3>config</h3>
-                        A small library which handles configuration variables.<br>
-                        Install an example program with <code>dpm get exampleConfig</code>.<br>
-                        This library can add the following arguments to your program:
-                        <ul>
-                            <li><code>exampleConfig config</code> to list all variables in config</li>
-                            <li><code>exampleConfig config &lt;variable name&gt;</code> to show the value of a specific variable</li>
-                            <li><code>exampleConfig config &lt;variable name&gt; &lt;value&gt;</code> to set a new value</li>
-                        </ul>
-                        <br>
-                        Take a look at the <a href="https://github.com/ColdIV/dependency-manager/blob/master/programs/exampleConfig.lua" target="_blank">example program</a> for more information.
-                    </div>
+                <div id="libs-list"></div>
+			</div>
+			
+            <div id="programs" class="page">
+                <div class="content">
+                    <h2>Programs</h2>
+                    <p>To install a program use: <code>dpm get &lt;name&gt;</code></p>
+                    <p>
+                        You can download programs from pastebin with <code>dpm get name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">here</a> by typing <code>dpm get scriptName</code>.
+                    </p>
+                    <hr>
+                    <p><strong>Click <a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">here</a> if you prefer a simple and always up-to-date list.</strong></p>
                 </div>
 
-                <!-- Add new cards below -->
-
-                <!-- Add new cards above -->
+                <div style="text-align: center; margin-top: 20px;">
+                    To add your own program here, please create a <a href="https://github.com/ColdIV/dependency-manager" target="_blank">pull request</a>.
+                </div>
+                
+                <div id="programs-list"></div>
 			</div>
             
 			<div id="about" class="page">
@@ -329,6 +149,46 @@ return math.random(1,100)</code></pre>
                     To run, just run <code>exampleProgram</code> normally, without bothering to install any of the dependencies. <strong>dpm</strong> will handle that for you.
                 </div>
 			</div>
+
+            <!-- Has to be last element due to CSS for .page.default -->
+            <div id="dpm" class="page default">
+                <strong>Install</strong><br><br>
+                <code class="prominent">pastebin run FuQ3WvPs KqhwihZr dpm</code>
+                <div class="content">
+                    <h2>Dependency Manager</h2>
+                    <h3>Install</h3>
+                    <p>
+                        To install the <strong>Dependency Manager</strong> (dpm) copy the install script <code>pastebin run FuQ3WvPs KqhwihZr dpm</code> and paste it in your <a href="https://tweaked.cc/" target="_blank">Turtles / Computers</a> console.
+                    </p>
+                    <h2>Download Programs</h2>
+                    <p>You can download programs with <code>dpm get &lt;name&gt;</code>.<br>A list of programs can be found <a href="#programs" target="_blank">here</a>.</p>
+                    <h2>Install libs</h2>
+                    <p>
+                        Libraries can be installed to be used in your own projects.<br>
+                        You can find a list of them <a href="#libs" target="_blank">here</a>.
+                    </p>
+                    <h2>About</h2>
+                    <p>
+                        Click <a href="#about">here</a> for more information about this project.
+                    </p>
+                    <p><strong>Or view this project on</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">GitHub</a>.</p>
+                </div>
+			</div>
+
+            <!-- Template -->
+            <template id="scriptTemplate">
+                <div class="content-card">
+                    <code class="prominent">{{install}}</code>
+                    <div>
+                        <h3>{{name}}</h3>
+                        <p>
+                            {{description}}
+                        </p>                        
+                        {{example}}
+                    </div>
+                </div>
+            </template>
+            <!-- /Template -->
 		</main>
 	</body>
 </html>

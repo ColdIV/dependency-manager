@@ -1,0 +1,144 @@
+html, body { margin: 0; padding: 0; }
+
+body {
+    color: #ccc;
+    background: #222;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header, main, footer {
+    box-sizing: border-box;
+    max-width: 1200px;
+    width: 100%;
+}
+header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 1rem 0;
+    color: #ccc;
+    margin-bottom: 1rem;
+    font-variant: small-caps;
+    text-transform: lowercase;
+}
+header nav a {
+    margin-right: 8px;
+}
+header a {
+    text-decoration: none;
+}
+header a:hover {
+    text-decoration: underline;
+}
+
+.page {
+    display: none;
+}
+
+.page.default {
+    display: block;
+}
+
+.page:target {
+    display: block;
+}
+
+.page:target ~ .page.default {
+    display: none;
+}
+
+.page .content {
+    background-color: #ccc;
+    border-radius: 3px;
+    color: #222;
+    padding: 1rem;
+}
+
+code ~ .content {
+    margin-top: 40px;
+}
+
+a {
+    color: #efefef;
+}
+
+.content a {
+    color: #000;
+}
+
+code {
+    background-color: #191919;
+    color: #ccc;
+    padding: 1px 5px;
+}
+
+code.prominent {
+    background-color: #ccc;
+    border: 1px dotted #222;
+    color: #222;
+    padding: .5rem;
+}
+
+pre {
+    background-color: #191919;
+    padding: 1rem;
+    overflow: auto;
+}
+pre code {
+    padding: initial;
+}
+
+h1 {
+    position: relative;
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+h1 .sub {
+    position: absolute;
+    left: 200px;
+    top: 50px;
+    font-size: 14px;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.content-card {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}
+
+.content-card div {
+    box-sizing: border-box;
+    margin-top: 10px;
+    width: 100%;
+    background-color: #ccc;
+    border-radius: 3px;
+    color: #222;
+    padding: 1rem;
+}
+
+.content-card div a {
+    color: #000;
+}
+
+@media only screen and (max-width: 600px) {
+    main, header, footer {
+        padding: 1rem;
+    }
+
+    h1 .sub {
+        top: 90px;
+        left: 0;
+    }
+}
