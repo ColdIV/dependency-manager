@@ -139,4 +139,18 @@ function obj:prettyPrint (text)
     return self:prefixPrint("", text)
 end
 
+function obj:error (text)
+    local tmpPrefixColor = self.prefixColor
+    local tmpTextColor = self.currentColor
+    local tmpBgColor = self.bgColor
+    self:setPrefixColor('red')
+    self:setColor('white')
+    self:setBgColor('black')
+    local result = self:prefixPrint("[Error] ", text)
+    self:setPrefixColor(tmpPrefixColor)
+    self:setColor(tmpTextColor)
+    self:setBgColor(tmpBgColor)
+    return result
+end
+
 return obj
