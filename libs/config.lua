@@ -6,7 +6,7 @@ local obj = {}
 
 obj.name = "default"
 obj.path = "default/"
-obj.pathPrefix = "config/"
+obj.pathPrefix = "cldv/config/"
 obj.configFile = "config.json"
 obj.config = {}
 
