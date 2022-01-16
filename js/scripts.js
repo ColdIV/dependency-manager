@@ -1,7 +1,7 @@
 const libsList = document.querySelector('#libs-list')
-const libsFile = '../data/libs.json'
+const libsFile = '../dependency-manager/data/libs.json'
 const programsList = document.querySelector('#programs-list')
-const programsFile = '../data/programs.json'
+const programsFile = '../dependency-manager/data/programs.json'
 
 const addScripts = (objects, type) => {
     const template = document.querySelector('#scriptTemplate')
