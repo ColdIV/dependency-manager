@@ -14,5 +14,21 @@
         "author_url": "https://github.com/ColdIV",
         "description": "A small API that allows you to send messages to a Discord channel from a computer in Minecraft.<br>You will have to <a href=\"https://github.com/ColdIV/discord-bot-api\" target=\"_blank\">host your own API</a> though.",
         "example": "exampleDiscordAPI"
+    },
+    "prettyPrint": {
+        "install": "prettyPrint",
+        "name": "prettyPrint",
+        "author": "ColdIV",
+        "author_url": "https://github.com/ColdIV",
+        "description": "Implements a print that automatically adds line-breaks between words and enables you to add a colored prefix to your messages.<br>Also adds the <code>error()</code> function which always has the red prefix '[Error] '.",
+        "example": "examplePrettyPrint"
+    },
+    "log": {
+        "install": "log",
+        "name": "log",
+        "author": "ColdIV",
+        "author_url": "https://github.com/ColdIV",
+        "description": "Allows you to write to a log file.<br>Log can be cleard with <code>programName log clear</code> if you call the function <code>log:handleArgs({...})</code>.",
+        "example": "exampleLog"
     }
 }
