@@ -122,9 +122,9 @@ There are a bunch of commands you can use with the Dependency Manager (dpm):
 
 To do that please create a pull request and add your script to the others in `libs/`.
 
-Also please add a card with a small description of your script to the `inhdex.html` within the `gh-pages` branch.
+Also please add your library / program to the respective json file within the `data` folder in the `gh-pages` branch.
 
-You can just copy the structure of the `example` that I've added in there.
+If there still is no program inside of the `programs.json`, you can just copy the style of `libs.json`.
 
 **Or,** if you know how to improve the **Dependency Manager** itself, you are very welcome to create a pull request for that as well!
 
