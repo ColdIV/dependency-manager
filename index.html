@@ -6,6 +6,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
         <link href="css/style.css" rel="stylesheet">
+        <script async src="js/scripts.js"></script>
 
 		<title>
 			Dependency Manager for CC: Tweaked
@@ -17,7 +18,7 @@
 				<a href="#dpm">dpm</a>
 				<a href="#libs">libs</a>
 				<a href="#programs">programs</a>
-				<a href="#about">About</a>
+				<a href="https://github.com/ColdIV/dependency-manager/blob/master/README.md" target="_blank">README.md</a>
 			</nav>
 			<a href="https://github.com/ColdIV/dependency-manager" target="_blank">source</a>
 		</header>
@@ -37,10 +38,13 @@
 local scriptName = dpm:load("scriptName")</code></pre>
                     <p>Dependencies will be automatically installed by <strong>dpm</strong>.</p>
                     <p>
-                        You can install your own scripts from pastebin with <code>name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.
+                        You can install your own scripts from pastebin with <code>dpm install name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> by typing <code>dpm install scriptName</code>.
                     </p>
                     <hr>
-                    <p><strong>Click <a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">here</a> if you prefer a simple and always up-to-date list.</strong></p>
+                    <p>An always up-to-date list can be found here:</p>
+                    <ul>
+                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/libs" target="_blank">ColdIV/dependency-manager/tree/master/libs</a></li>
+                    </ul>
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
@@ -58,7 +62,10 @@ local scriptName = dpm:load("scriptName")</code></pre>
                         You can download programs from pastebin with <code>dpm get name@pastebinCode</code> or install any script from <a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">here</a> by typing <code>dpm get scriptName</code>.
                     </p>
                     <hr>
-                    <p><strong>Click <a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">here</a> if you prefer a simple and always up-to-date list.</strong></p>
+                    <p>An always up-to-date list can be found here:</p>
+                    <ul>
+                        <li><a href="https://github.com/ColdIV/dependency-manager/tree/master/programs" target="_blank">ColdIV/dependency-manager/tree/master/programs</a></li>
+                    </ul>
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
@@ -66,88 +73,6 @@ local scriptName = dpm:load("scriptName")</code></pre>
                 </div>
                 
                 <div id="programs-list"></div>
-			</div>
-            
-			<div id="about" class="page">
-                <div class="content">
-                    <h2>About</h2>
-                    <p>This is a small dependency manager for the scripts that I made for projects in <a href="https://www.minecraft.net/" target="_blank">Minecraft</a> with the mod <a href="https://tweaked.cc/" target="_blank">CC: Tweaked</a>.</p>
-                    <br>
-                    <p><strong>View this project on GitHub:</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">ColdIV/dependency-manager</a></p>
-                    <br>
-                    <p>Click <a href="#install">here</a> to find out how to install the <strong>Dependency Manager</strong>.</p>
-                    <p>Click <a href="#overview">here</a> to find and install existing scripts.</p>
-                    <hr>
-                    <p><strong>List of available commands:</strong></p>
-                    <ul>
-                        <li><code>dpm install &lt;name&gt; &lt;pastebin code&gt;</code></li>
-                        <li><code>dpm install &lt;name@pastebin code&gt;</code></li>
-                        <li><code>dpm update &lt;name&gt;</code></li>
-                        <li><code>dpm update all</code></li>
-                        <li><code>dpm remove &lt;name&gt;</code></li>
-                        <li><code>dpm remove all</code></li>
-                        <li><code>dpm list</code></li>
-                        <li><code>dpm get &lt;name&gt;</code></li>
-                        <li><code>dpm get &lt;name@pastebin code&gt;</code></li>
-                        <li><code>dpm config</code></li>
-                        <li><code>dpm config &lt;name&gt; &lt;value&gt;</code></li>
-                        <li><code>dpm help</code></li>
-                        <li><code>dpm help &lt;argument name&gt;</code></li>
-                    </ul>
-                    <hr>
-                    <p><strong>Example usage:</strong></p>
-                    <pre><code>local dpm = require("dpm")
-local scriptName = dpm:load("scriptName")
---- or, to install if script cannot be found:
-local scriptName = dpm:load("scriptName@pastebinCode")</code></pre>
-
-
-                    <p><strong>Example Program:</strong></p>
-                    <pre><code>-- exampleProgram.lua
-local dpm = require("dpm")
-
-local example = dpm:load("example")
-
-example:test()</code></pre>
-                    Loads the library <code>example</code> and its dependencies.
-
-                    If the file cannot be found locally it will search for it within this repository or on pastebin if the code has previously been saved to the <code>scripts.json</code>.
-
-                    <p><strong>Example Libraries:</strong></p>
-                    <pre><code>-- example.lua
---@requires examplePrint
-
-local obj = {}
-
-local examplePrint = require("cldv.dpm.libs.examplePrint")
-
-function obj:test()
-    examplePrint:printRandomNumber()
-end
-
-return obj</code></pre>
-                    <strong>Note: The comment: <code>--@requires examplePrint</code> is required to check for and install the library <code>examplePrint</code> if it is not yet installed.</strong>
-
-                    <pre><code>-- examplePrint.lua
---@requires exampleNumber@QsN94px9
-
-local obj = {}
-
-local exampleNumber = require("cldv.dpm.libs.exampleNumber")
-
-function obj:printRandomNumber ()
-    print ("It works! Random Number: " .. exampleNumber)
-end
-
-return obj</code></pre>
-                    <strong>Note: Here the require comment has a pastebin code within it, this will make sure to install the file from pastebin if it is not yet installed.</strong>
-
-                    <pre><code>-- exampleNumber.lua (from https://pastebin.com/QsN94px9)
-return math.random(1,100)</code></pre>
-
-                    <p><strong>Run</strong></p>
-                    To run, just run <code>exampleProgram</code> normally, without bothering to install any of the dependencies. <strong>dpm</strong> will handle that for you.
-                </div>
 			</div>
 
             <!-- Has to be last element due to CSS for .page.default -->
@@ -167,24 +92,25 @@ return math.random(1,100)</code></pre>
                         Libraries can be installed to be used in your own projects.<br>
                         You can find a list of them <a href="#libs" target="_blank">here</a>.
                     </p>
-                    <h2>About</h2>
-                    <p>
-                        Click <a href="#about">here</a> for more information about this project.
-                    </p>
-                    <p><strong>Or view this project on</strong> <a href="https://github.com/ColdIV/dependency-manager" target="_blank">GitHub</a>.</p>
+                    <h2>Information</h2>
+                    <p>For more information take a look at the <a href="https://github.com/ColdIV/dependency-manager" target="_blank">GitHub project</a> and read the <a href="https://github.com/ColdIV/dependency-manager/blob/master/README.md" target="_blank">README</a>.</p>
                 </div>
 			</div>
 
             <!-- Template -->
             <template id="scriptTemplate">
                 <div class="content-card">
-                    <code class="prominent">{{install}}</code>
+                    <code class="prominent code-example-tmpl"></code>
                     <div>
-                        <h3>{{name}}</h3>
-                        <p>
-                            {{description}}
-                        </p>                        
-                        {{example}}
+                        <h3 class="name-tmpl"></h3>
+                        <p class="description-tmpl"></p>                        
+                        <p class="example-program-tmpl">
+                            <code class="example-program-install"></code>
+                        </p>
+                        <hr>
+                        <small class="author-tmpl">
+                            <a href="" target="_blank"></a>
+                        </small>
                     </div>
                 </div>
             </template>

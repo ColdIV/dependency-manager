@@ -1,0 +1,18 @@
+{
+    "config": {
+        "install": "config",
+        "name": "config",
+        "author": "ColdIV",
+        "author_url": "https://github.com/ColdIV",
+        "description": "A small library which handles configuration variables.<br><br>This library can add the following arguments to your program:<ul><li><code>exampleConfig</code> to list all variables in config</li><li><code>exampleConfig config &lt;variable name&gt;</code> to show the value of a specific variable</li><li><code>exampleConfig config &lt;variable name&gt; &lt;value&gt;</code> to set a new value</li></ul>",
+        "example": "exampleConfig"
+    },
+    "discordAPI": {
+        "install": "discordAPI",
+        "name": "discordAPI",
+        "author": "ColdIV",
+        "author_url": "https://github.com/ColdIV",
+        "description": "A small API that allows you to send messages to a Discord channel from a computer in Minecraft.<br>You will have to <a href=\"https://github.com/ColdIV/discord-bot-api\" target=\"_blank\">host your own API</a> though.",
+        "example": "exampleDiscordAPI"
+    }
+}
