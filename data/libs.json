@@ -20,7 +20,7 @@
         "name": "prettyPrint",
         "author": "ColdIV",
         "author_url": "https://github.com/ColdIV",
-        "description": "Implements a print that automatically adds line-breaks between words and enables you to add a colored prefix to your messages.<br>Also adds the <code>error()</code> function which always has the red prefix '[Error] '.",
+        "description": "Implements a print function that automatically adds line-breaks between words and enables you to add a colored prefix to your messages.<br>Also adds the <code>error()</code> function which always has the red prefix '[Error] '.",
         "example": "examplePrettyPrint"
     },
     "log": {
@@ -28,7 +28,7 @@
         "name": "log",
         "author": "ColdIV",
         "author_url": "https://github.com/ColdIV",
-        "description": "Allows you to write to a log file.<br>Log can be cleard with <code>programName log clear</code> if you call the function <code>log:handleArgs({...})</code>.",
+        "description": "Allows you to write to a log file.<br>Log can be cleared with <code>programName log clear</code> if you call the function <code>log:handleArgs({...})</code>.",
         "example": "exampleLog"
     }
 }
