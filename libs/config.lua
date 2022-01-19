@@ -79,6 +79,8 @@ function obj:handleArgs(args)
             else
                 print (self:get(args[2]))
             end
+
+            return true
         end
     end
 end
