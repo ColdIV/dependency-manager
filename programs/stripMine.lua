@@ -1,8 +1,16 @@
--- pastebin run FuQ3WvPs wbPXakgy advancedMining
 local args = {...}
 
--- CONFIG -- EDIT BELOW
+local dpm = require('dpm')
 
+local config = dpm:load('config')
+
+config:init('stripMine')
+
+-- ends program if config finds arguments to handle
+if config:handleArgs(args) then do return end end
+
+-- Loot Tables (Not sure how to handle those yet)
+-- May have to add types to config and serialise tables. Should be the best solution
 local fuelTable = {
 	"coal",
     "charcoal"
@@ -43,23 +51,23 @@ local blockTable = {
 local lightTable = {
 	"torch"
 }
-local sideTrackMaxLength = 32
-local placeTorchAt = 8
-local notifications = true
-local ignoreErrors = {} -- just add the error nr to the table
-local DEBUG = false
+
+-- Move vars to config
+config:add("sideTrackMaxLength", 32)
+config:add("placeTorchAt", 8)
+config:add("notifications", true)
+config:add("DEBUG", false)
+-- local sideTrackMaxLength = 32
+-- local placeTorchAt = 8
+-- local notifications = true
+local ignoreErrors = {} 
+-- local DEBUG = false
 
 -- END CONFIG / START CODE -- DO NOT EDIT BELOW
 
 local version = "v1.0"
 local turtleName = os.getComputerLabel()
-local startupMessage = [[
----------------------------------
-- advancedMining ]] .. version .. [[           -
-- by ColdIV                     -
-- pastebin.com/wbPXakgy         -
----------------------------------
-]]
+local startupMessage = ""
 local consolePrefix = "[aM " .. version .. "] "
 
 local T = turtle
