@@ -37,7 +37,7 @@ function obj:convertOriginal(name)
 end
 
 function obj:checkType(name, value)
-    if not self.types[name] or not self.config[name] then return false end
+    if self.types[name] == nil or self.config[name] == nil then return false end
 
     if self.types[name] == "table" then
         value = textutils.serialiseJSON(value)
