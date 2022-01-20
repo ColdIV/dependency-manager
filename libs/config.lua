@@ -9,9 +9,35 @@ obj.path = "default/"
 obj.pathPrefix = "cldv/config/"
 obj.configFile = "config.json"
 obj.config = {}
+obj.types = {}
+
+function obj:convertString(value)
+    if type(value) == "table" then
+        return textutils.serialiseJSON(value)
+    else
+        return tostring(value)
+    end
+end
+
+function obj:convertOriginal(name)
+    if self.types[name] == "table" then
+        return textutils.unserialiseJSON(self.config[name])
+    end
+    
+    if self.types[name] == "boolean" then
+        return self.config[name] == "true"
+    end
+    
+    if self.types[name] == "number" then
+        return tonumber(self.config[name])
+    end
+
+    -- string or unsupported type
+    return self.config[name]
+end
 
 function obj:get(name)
-    return self.config[name]
+    return self:convertOriginal(name)
 end
 
 function obj:clear()
@@ -21,7 +47,8 @@ end
 function obj:save()
     local file = fs.open(self.path .. self.configFile, "w")
     if file then
-        file.write (textutils.serializeJSON(self.config))
+        local temp = {config = self.config, types = self.types}
+        file.write (textutils.serializeJSON(temp))
         file.close()
     end
 end
@@ -34,14 +61,20 @@ function obj:load()
     else
         local temp = textutils.unserializeJSON(file.readAll()) or {}
         file.close()
-        if tablelength(temp) >= tablelength(self.config) then
-            self.config = temp
+        if temp.config and tablelength(temp.config) >= tablelength(self.config) and
+           temp.types and tablelength(temp.types) >= tablelength(self.types) then
+            self.config = temp.config
+            self.types = temp.types
         else self:save() end
     end
 end
 
 function obj:add(name, value)
     if not self.config[name] then
+        self.types[name] = type(value)
+        if type(value) == "table" then
+            value = textutils.serialiseJSON(value)
+        end
         self.config[name] = value
         self:save()
         return true
@@ -50,7 +83,7 @@ function obj:add(name, value)
 end
 
 function obj:set(name, value)
-    if self.config[name] ~= nil then
+    if self.config[name] ~= nil and self.types[name] == type(value) then
         self.config[name] = value
         self:save()
         return true
@@ -60,8 +93,11 @@ function obj:set(name, value)
 end
 
 function obj:list()
+    print ("+--------+--------+---------+")
+    print ("| ", "name", " | ", "type", " | ", "value", " |")
+    print ("+--------+--------+---------+")
     for name, value in pairs(self.config) do
-        print (name, " ", value)
+        print (name, " ", self.types[name], " ", value)
     end
 end
 
@@ -72,13 +108,11 @@ function obj:handleArgs(args)
     for name, value in pairs(self.config) do
         if args[2] == name then
             if args[3] then
-                local value = args[3]
-                if args[3] == "true" then value = true
-                elseif args[3] == "false" then value = false end
-                self:set(args[2], value)
+                self:set(args[2], args[3])
             else
                 print (self:get(args[2]))
             end
+            return true
         end
     end
 end
