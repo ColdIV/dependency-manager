@@ -102,7 +102,7 @@ function obj:load()
 end
 
 function obj:add(name, value)
-    if not self.config[name] then
+    if self.config[name] == nil then
         self.types[name] = type(value)
         if type(value) == "table" then
             value = textutils.serialiseJSON(value)
@@ -111,7 +111,7 @@ function obj:add(name, value)
         self:save()
         return true
     end
-    return false
+    return false, name .. " already exists."
 end
 
 function obj:set(name, value)
@@ -123,7 +123,7 @@ function obj:set(name, value)
         self:save()
         return true
     else
-        return false
+        return false, name .. " doesn't exist."
     end
 end
 

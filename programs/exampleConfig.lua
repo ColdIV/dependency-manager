@@ -30,4 +30,11 @@ if #args == 0 then
     
     print ("Listing variables in config...")
     config:list()
+
+    print ("Return values of adding b a second time:")
+    local success, msg = config:add("b", 456)
+    print (success, msg)
+    print ("Return values of adding e a first time:")
+    success, msg = config:add("e", "test")
+    print (success, msg)
 end
