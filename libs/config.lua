@@ -36,6 +36,38 @@ function obj:convertOriginal(name)
     return self.config[name]
 end
 
+function obj:checkType(name, value)
+    if not self.types[name] or not self.config[name] then return false end
+
+    if self.types[name] == "table" then
+        value = textutils.serialiseJSON(value)
+        if value then 
+            return true
+        else 
+            return false
+        end
+    end
+
+    if self.types[name] == "boolean" then
+        if value == "true" or value == "false" then
+            return true
+        else 
+            return false
+        end
+    end
+
+    if self.types[name] == "number" then
+        if tostring(tonumber(value)) == value then
+            return true
+        else
+            return false
+        end
+    end
+
+    -- assume string
+    return true
+end
+
 function obj:get(name)
     return self:convertOriginal(name)
 end
@@ -83,7 +115,10 @@ function obj:add(name, value)
 end
 
 function obj:set(name, value)
-    if self.config[name] ~= nil and self.types[name] == type(value) then
+    if self.config[name] ~= nil then
+        if not self:checkType(name, value) then
+            return false
+        end
         self.config[name] = value
         self:save()
         return true
