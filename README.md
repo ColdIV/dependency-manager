@@ -1,6 +1,9 @@
 # Dependency Manager
 A dependency manager for scripts to use in the mod CC: Tweaked of Minecraft.
 
+A better, more up-to-date script manager can be found [here](https://github.com/mc-cc-scripts/script-manager).
+---
+
 # Install
 To install run the following script in your computers / turtles console:
 
